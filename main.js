@@ -107,6 +107,28 @@ const dot = function() {
 
 }
 
+// keyMap for keyboard functions
+
+const keyMap = {
+  "1": "one",
+  "2": "two",
+  "3": "three",
+  "4": "four",
+  "5": "five",
+  "6": "six",
+  "7": "seven",
+  "8": "eight",
+  "9": "nine",
+  "0": "zero",
+  ".": "decimal",
+  "Enter": "equals",
+  "+": "addition",
+  "-": "subtraction",
+  "/": "division",
+  "*": "multiplication"
+};
+
+
 // grab DOM buttons
 
 let numButtons = document.querySelectorAll(".oneToNine, .zero");
@@ -314,5 +336,16 @@ body.addEventListener("keydown", function(e){
   }
 })
 
-// add keyboard support
-// add backspace support
+document.addEventListener("keydown", (e) => {
+  const key = document.querySelector(`#${keyMap[e.key]}`);
+  if (key) {
+    key.style.backgroundColor = "#666";
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  const key = document.querySelector(`#${keyMap[e.key]}`);
+  if (key) {
+    key.style.backgroundColor = "#444";
+  }
+});
