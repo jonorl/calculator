@@ -69,21 +69,22 @@ const equals = function(){
   result = result.toString();
   let [integerPart, decimalPart] = result.split(".");
 
+  const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
+
   // Handle case where the result is an integer (no decimals)
   if (!decimalPart) {
-    if (integerPart.length > 12) {
-      display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
-    } else {
-      display.textContent = integerPart; // No decimals, just display integer part
-    }
-  } else {
+    display.textContent = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+  } 
+  else {
     // Handle result with decimals
-    if (integerPart.length > 12) {
-      display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
-    } else {
-      let maxDecimals = 12 - integerPart.length; // Calculate how many decimal places we can show
-      let formattedResult = parseFloat(result).toFixed(maxDecimals); // Limit decimals
-      display.textContent = formattedResult;
+    if (integerPart.length >= 12) {
+        display.textContent = integerPart.slice(0, 12);
+    } 
+    else {
+        let maxDecimals = 12 - integerPart.length;
+        let formattedResult = parseFloat(result).toFixed(maxDecimals);
+        formattedResult = removeTrailingZeros(formattedResult);
+        display.textContent = formattedResult;
     }
   }
 }
@@ -203,4 +204,4 @@ document.querySelector(".equals").addEventListener("click", function() {
 
 document.querySelector("#clear").addEventListener("click", clear);
 
-//test
+//fix decimal points!
