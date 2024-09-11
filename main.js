@@ -113,7 +113,8 @@ let numButtons = document.querySelectorAll(".oneToNine, .zero");
 let opButtons = document.querySelectorAll(".operator");
 let buttons = document.querySelectorAll("button");
 let display = document.querySelector(".display");
-let decimal = document.querySelector(".decimal")
+let decimal = document.querySelector(".decimal");
+let body = document.querySelector("body");
 
 
 // helper variables
@@ -250,7 +251,68 @@ document.querySelector(".equals").addEventListener("click", function() {
 
 document.querySelector("#clear").addEventListener("click", clear);
 
-// add plusMinus function
-// add percentage function
+body.addEventListener("keydown", function(e){
+  let allowedNums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+  let allowedOperators = ["+", "-", "/", "*", "Enter"]
+  let allowedHelpers = [".", "%"]
+
+  if(e.code == "Backspace"){
+    if (capturingFirst) {
+      firstNum = firstNum.substring(0, firstNum.length - 1);
+      display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+      }
+    else{
+      secondNum = secondNum.substring(0, secondNum.length - 1);
+      display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+    }
+  }
+
+  if (allowedNums.includes(e.key)){
+    if(capturingFirst){
+      firstNum += e.key;
+      display.textContent = firstNum;
+      }
+    else {
+    secondNum += e.key;
+    display.textContent = secondNum;
+    }
+  }
+
+  else if(allowedOperators.includes(e.key)){
+    switch (e.key){
+    case "*": 
+      document.querySelector("#multiplication").click();
+      break;
+    case "/": 
+      document.querySelector("#division").click();
+      break;
+    case "-": 
+      document.querySelector("#subtraction").click();
+      break;
+    case "+": 
+      document.querySelector("#addition").click();
+      break;
+    case "Enter": 
+      document.querySelector("#equals").click();
+      break;
+    }
+  }
+
+  else if(allowedHelpers.includes(e.key)){
+    switch (e.key){
+      case "%":
+        document.querySelector("#percentage").click();
+        break;
+      case ".":
+        document.querySelector("#decimal").click();
+        break;
+    }
+  }
+
+  else {
+    return;
+  }
+})
+
 // add keyboard support
 // add backspace support
