@@ -53,14 +53,29 @@ const operate = function(int1, mathOp, int2){
 }
 
 const equals = function(){
-  display.textContent = operate(firstNum, mathOperator, secondNum);
-  return operate(firstNum, mathOperator, secondNum);
+
+  let result = operate(firstNum, mathOperator, secondNum).toString();
+  let [integerPart, decimalPart] = result.split(".");
+
+  if (integerPart.length > 12) {
+    display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
+  } else {
+    let maxDecimals = 12 - integerPart.length;
+    display.textContent = parseFloat(result).toFixed(maxDecimals);
+  }
+
+
+
+  // display.textContent = operate(firstNum, mathOperator, secondNum);
+  displayValue = display.textContent;
+  // return operate(firstNum, mathOperator, secondNum);
 }
 
 const clear = function() {
   display.textContent = 0;
   firstNum = "";
   secondNum = "";
+  displayValue = "";
   capturingFirst = true;
 }
 
@@ -77,13 +92,21 @@ let firstNum = "";
 let secondNum = "";
 let mathOperator = "";
 let capturingFirst = true;
+let displayValue = "";
+
 
 numButtons.forEach(button => {
     button.addEventListener("click", function() {
         if (capturingFirst) {
+          if (firstNum.length < 12) {
             firstNum += button.textContent;
+            display.textContent = firstNum;
+        }
         } else {
+          if (secondNum.length < 12) {
             secondNum += button.textContent;
+            display.textContent = secondNum;
+        }
         }
     });
 });
