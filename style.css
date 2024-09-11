@@ -2,18 +2,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #121212; /* Dark background for the body */
-    margin: 0; /* Remove default margin */
+    height: 100vh; 
+    background-color: #121212; 
+    margin: 0; 
 }
 
 .calculator {
     display: flex;
     flex-direction: column;
-    width: 300px; /* Adjust as needed */
-    background-color: #333; /* Dark background */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px; /* Add padding around the calculator */
+    width: 300px; 
+    background-color: #333; 
+    border-radius: 10px; 
+    padding: 20px;
   }
   
   .display {
@@ -22,7 +22,7 @@ body {
     text-align: right;
     padding: 20px;
     font-size: 2em;
-    margin-bottom: 20px; /* Add margin to create space between display and buttons */
+    margin-bottom: 20px; 
   }
   
   .buttons {
@@ -34,12 +34,12 @@ body {
   button {
     padding: 20px;
     font-size: 1.5em;
-    background-color: #444; /* Dark button background */
-    color: white; /* Button text color */
-    border: none; /* Remove button border */
-    border-radius: 5px; /* Rounded button corners */
+    background-color: #444; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
   }
   
   button#zero {
-    grid-column: span 2; /* Make the zero button span two columns */
+    grid-column: span 2; 
   }
