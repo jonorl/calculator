@@ -93,7 +93,6 @@ const clear = function() {
   firstNum = "";
   secondNum = "";
   mathOperator = "";
-  displayValue = "";
   capturingFirst = true;
   operatorPressedAlready = false;
 }
@@ -112,7 +111,6 @@ let secondNum = "";
 let mathOperator = "";
 let capturingFirst = true;
 let operatorPressedAlready = false;
-let displayValue = "";
 
 
 numButtons.forEach(button => {
@@ -158,7 +156,14 @@ buttons.forEach(button => {
   });
 });
 
-document.querySelector(".equals").addEventListener("click", equals);
+document.querySelector(".equals").addEventListener("click", function() {
+  if (firstNum == "" || secondNum == "") {
+    return;
+    } 
+  else {
+    equals(); 
+    }
+});
 
 document.querySelector("#clear").addEventListener("click", clear);
 
