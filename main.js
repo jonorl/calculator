@@ -57,13 +57,22 @@ const equals = function(){
   return operate(firstNum, mathOperator, secondNum);
 }
 
+const clear = function() {
+  display.textContent = 0;
+  firstNum = "";
+  secondNum = "";
+  capturingFirst = true;
+}
+
 
 // grab variables
 
 
 let numButtons = document.querySelectorAll(".oneToNine, .zero");
-let opButtons = document.querySelectorAll(".operator")
+let opButtons = document.querySelectorAll(".operator");
+let buttons = document.querySelectorAll("button");
 let display = document.querySelector(".display");
+
 let firstNum = "";
 let secondNum = "";
 let mathOperator = "";
@@ -86,6 +95,19 @@ opButtons.forEach(button => {
   });
 });
 
+
+buttons.forEach(button => {
+  button.addEventListener("mousedown", function() {
+    button.style.backgroundColor = "#666";
+  });
+
+  button.addEventListener("mouseup", function() {
+    button.style.backgroundColor = "#444";
+  });
+});
+
 document.querySelector(".equals").addEventListener("click", equals);
+
+document.querySelector("#clear").addEventListener("click", clear);
 
 //test
