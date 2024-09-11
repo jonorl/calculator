@@ -139,7 +139,6 @@ opButtons.forEach(button => {
       mathOperator = button.textContent;
       firstNum = display.textContent;
       secondNum = "";
-      operatorPressedAlready = false;
     }
     else {
     mathOperator = button.textContent;
