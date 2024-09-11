@@ -61,22 +61,23 @@ const equals = function(){
   let result = operate(firstNum, mathOperator, secondNum);
 
   // Check if result is "LOL" or a non-numeric value
+
   if (result === undefined) {
     display.textContent = "LOL";
     return;
   }
 
+
+  // Dynamically adjust length to have max 12 chars displayed
+
   result = result.toString();
   let [integerPart, decimalPart] = result.split(".");
 
   const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
-
-  // Handle case where the result is an integer (no decimals)
   if (!decimalPart) {
     display.textContent = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
   } 
   else {
-    // Handle result with decimals
     if (integerPart.length >= 12) {
         display.textContent = integerPart.slice(0, 12);
     } 
@@ -98,20 +99,24 @@ const clear = function() {
   operatorPressedAlready = false;
   dotPressedFirstNum = false;
   dotPressedSecondNum = false;
+  minusSignOnFirstNum = false;
+  minusSignOnSecondNum = false;
 }
 
 const dot = function() {
 
 }
 
-// grab variables
-
+// grab DOM buttons
 
 let numButtons = document.querySelectorAll(".oneToNine, .zero");
 let opButtons = document.querySelectorAll(".operator");
 let buttons = document.querySelectorAll("button");
 let display = document.querySelector(".display");
 let decimal = document.querySelector(".decimal")
+
+
+// helper variables
 
 let firstNum = "";
 let secondNum = "";
@@ -120,7 +125,11 @@ let capturingFirst = true;
 let operatorPressedAlready = false;
 let dotPressedFirstNum = false;
 let dotPressedSecondNum = false;
+let minusSignOnFirstNum = false;
+let minusSignOnSecondNum = false;
 
+
+// Event Listeners
 
 numButtons.forEach(button => {
     button.addEventListener("click", function() {
@@ -165,6 +174,33 @@ document.querySelector(".decimal").addEventListener("click", function() {
     }
 })
 
+document.querySelector("#plusMinus").addEventListener("click", function() {
+  if (capturingFirst) {
+      if(minusSignOnFirstNum == false){
+        minusSignOnFirstNum = true;
+        firstNum = "-" + firstNum 
+        display.textContent = firstNum;
+        }
+      else {
+        minusSignOnFirstNum = true;
+        firstNum = firstNum.substring(1);
+        display.textContent = firstNum;
+        }
+  }
+  else {
+    if (minusSignOnSecondNum == false) {
+        minusSignOnSecondNum = true;
+        secondNum = "-" + secondNum
+        display.textContent = secondNum;
+        }
+    else{
+      minusSignOnSecondNum = true;
+      secondNum = secondNum.substring(1);
+      display.textContent = secondNum;
+      }
+  }
+})
+
 opButtons.forEach(button => {
   button.addEventListener("click", function() {
     capturingFirst = false;
@@ -181,7 +217,6 @@ opButtons.forEach(button => {
     }
   });
 });
-
 
 buttons.forEach(button => {
   button.addEventListener("mousedown", function() {
@@ -204,4 +239,7 @@ document.querySelector(".equals").addEventListener("click", function() {
 
 document.querySelector("#clear").addEventListener("click", clear);
 
-//fix decimal points!
+// add plusMinus function
+// add percentage function
+// add keyboard support
+// add backspace support
