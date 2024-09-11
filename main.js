@@ -125,7 +125,8 @@ const keyMap = {
   "+": "addition",
   "-": "subtraction",
   "/": "division",
-  "*": "multiplication"
+  "*": "multiplication",
+  "c": "clear"
 };
 
 
