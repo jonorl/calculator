@@ -182,7 +182,7 @@ document.querySelector("#plusMinus").addEventListener("click", function() {
         display.textContent = firstNum;
         }
       else {
-        minusSignOnFirstNum = true;
+        minusSignOnFirstNum = false;
         firstNum = firstNum.substring(1);
         display.textContent = firstNum;
         }
@@ -194,10 +194,21 @@ document.querySelector("#plusMinus").addEventListener("click", function() {
         display.textContent = secondNum;
         }
     else{
-      minusSignOnSecondNum = true;
+      minusSignOnSecondNum = false;
       secondNum = secondNum.substring(1);
       display.textContent = secondNum;
       }
+  }
+})
+
+document.querySelector("#percentage").addEventListener("click", function() {
+  if (capturingFirst) {
+    firstNum = firstNum * 0.1;
+    display.textContent = firstNum;
+    }
+  else {
+    secondNum = secondNum * 0.1;
+    display.textContent = secondNum;
   }
 })
 
