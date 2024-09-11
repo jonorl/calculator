@@ -61,7 +61,6 @@ const equals = function(){
   let result = operate(firstNum, mathOperator, secondNum);
 
   // Check if result is "LOL" or a non-numeric value
-  console.log(result)
   if (result === undefined) {
     display.textContent = "LOL";
     return;
@@ -93,8 +92,10 @@ const clear = function() {
   display.textContent = 0;
   firstNum = "";
   secondNum = "";
+  mathOperator = "";
   displayValue = "";
   capturingFirst = true;
+  operatorPressedAlready = false;
 }
 
 
@@ -110,6 +111,7 @@ let firstNum = "";
 let secondNum = "";
 let mathOperator = "";
 let capturingFirst = true;
+let operatorPressedAlready = false;
 let displayValue = "";
 
 
@@ -131,8 +133,18 @@ numButtons.forEach(button => {
 
 opButtons.forEach(button => {
   button.addEventListener("click", function() {
-    mathOperator = button.textContent;
     capturingFirst = false;
+    if(operatorPressedAlready === true){
+      equals();
+      mathOperator = button.textContent;
+      firstNum = display.textContent;
+      secondNum = "";
+      operatorPressedAlready = false;
+    }
+    else {
+    mathOperator = button.textContent;
+    operatorPressedAlready = true;
+    }
   });
 });
 
