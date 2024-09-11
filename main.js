@@ -293,12 +293,16 @@ body.addEventListener("keydown", function(e){
 
   if (allowedNums.includes(e.key)){
     if(capturingFirst){
+      if (firstNum.length < 12) {
       firstNum += e.key;
       display.textContent = firstNum;
       }
+      }
     else {
+      if (secondNum.length < 12) {
     secondNum += e.key;
     display.textContent = secondNum;
+      }
     }
   }
 
@@ -354,3 +358,7 @@ document.addEventListener("keyup", (e) => {
     key.style.backgroundColor = "#444";
   }
 });
+
+// bugs:
+// keyboard input has unlimited Chars
+// doing keyboard 5, clicking minus and doing + 8 results in -8, not 3
