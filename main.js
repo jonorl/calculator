@@ -28,8 +28,7 @@ const multiply = function(array) {
 
 const divide = function(array) {
   if (array[1] == 0){
-    display.textContent = "LOL";
-    return;
+    return "LOL";
   }
   else {
   let divided = array.reduce((accumulator, currentValue) => {
@@ -60,13 +59,14 @@ const equals = function(){
 
   let result = operate(firstNum, mathOperator, secondNum);
 
+
   // Check if result is "LOL" or a non-numeric value
 
-  if (result === undefined) {
+  if (result === "LOL") {
     display.textContent = "LOL";
     return;
   }
-
+  
 
   // Dynamically adjust length to have max 12 chars displayed
 
@@ -80,18 +80,18 @@ const equals = function(){
   else {
     if (integerPart.length >= 12) {
         display.textContent = integerPart.slice(0, 12);
-    } 
+        }  
     else {
         let maxDecimals = 12 - integerPart.length;
         let formattedResult = parseFloat(result).toFixed(maxDecimals);
         formattedResult = removeTrailingZeros(formattedResult);
         display.textContent = formattedResult;
-    }
+        }
   }
 }
 
 const clear = function() {
-  display.textContent = 0;
+  display.textContent = "\u00A0";
   firstNum = "";
   secondNum = "";
   mathOperator = "";
@@ -263,6 +263,7 @@ buttons.forEach(button => {
 });
 
 document.querySelector(".equals").addEventListener("click", function() {
+  console.log("firstNum " + firstNum + "secondNum " + secondNum + "Math op " + mathOperator)
   if (firstNum == "" || secondNum == "") {
     return;
     } 
@@ -276,7 +277,7 @@ document.querySelector("#clear").addEventListener("click", clear);
 body.addEventListener("keydown", function(e){
   let allowedNums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
   let allowedOperators = ["+", "-", "/", "*", "Enter"]
-  let allowedHelpers = [".", "%"]
+  let allowedHelpers = [".", "%", "c"]
 
   if(e.code == "Backspace"){
     if (capturingFirst) {
@@ -315,7 +316,7 @@ body.addEventListener("keydown", function(e){
       document.querySelector("#addition").click();
       break;
     case "Enter": 
-      document.querySelector("#equals").click();
+      document.querySelector(".equals").click();
       break;
     }
   }
@@ -328,6 +329,9 @@ body.addEventListener("keydown", function(e){
       case ".":
         document.querySelector("#decimal").click();
         break;
+        case "c":
+          document.querySelector("#clear").click();
+          break;
     }
   }
 
