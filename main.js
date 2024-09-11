@@ -203,11 +203,11 @@ document.querySelector("#plusMinus").addEventListener("click", function() {
 
 document.querySelector("#percentage").addEventListener("click", function() {
   if (capturingFirst) {
-    firstNum = firstNum * 0.1;
+    firstNum = firstNum * 0.01;
     display.textContent = firstNum;
     }
   else {
-    secondNum = secondNum * 0.1;
+    secondNum = secondNum * 0.01;
     display.textContent = secondNum;
   }
 })
