@@ -95,8 +95,13 @@ const clear = function() {
   mathOperator = "";
   capturingFirst = true;
   operatorPressedAlready = false;
+  dotPressedFirstNum = false;
+  dotPressedSecondNum = false;
 }
 
+const dot = function() {
+
+}
 
 // grab variables
 
@@ -105,12 +110,15 @@ let numButtons = document.querySelectorAll(".oneToNine, .zero");
 let opButtons = document.querySelectorAll(".operator");
 let buttons = document.querySelectorAll("button");
 let display = document.querySelector(".display");
+let decimal = document.querySelector(".decimal")
 
 let firstNum = "";
 let secondNum = "";
 let mathOperator = "";
 let capturingFirst = true;
 let operatorPressedAlready = false;
+let dotPressedFirstNum = false;
+let dotPressedSecondNum = false;
 
 
 numButtons.forEach(button => {
@@ -129,6 +137,33 @@ numButtons.forEach(button => {
     });
 });
 
+document.querySelector(".decimal").addEventListener("click", function() {
+  if (capturingFirst) {
+    if (firstNum.length < 12) {
+      if(dotPressedFirstNum == true){
+        return;
+      }
+      else{
+        dotPressedFirstNum = true;
+        firstNum += ".";
+        display.textContent = firstNum;
+        }
+      }
+    } 
+  else {
+    if (secondNum.length < 12) {
+      if(dotPressedSecondNum == true){
+        return;
+        }
+      else{
+        dotPressedSecondNum = true;
+        secondNum += ".";
+        display.textContent = secondNum;
+        }
+      }
+    }
+})
+
 opButtons.forEach(button => {
   button.addEventListener("click", function() {
     capturingFirst = false;
@@ -137,6 +172,7 @@ opButtons.forEach(button => {
       mathOperator = button.textContent;
       firstNum = display.textContent;
       secondNum = "";
+      dotPressedSecondNum = false;
     }
     else {
     mathOperator = button.textContent;
