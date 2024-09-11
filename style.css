@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #121212; /* Dark background for the body */
+    margin: 0; /* Remove default margin */
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    width: 300px; /* Adjust as needed */
+    background-color: #333; /* Dark background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add padding around the calculator */
+  }
+  
+  .display {
+    background-color: #222;
+    color: white;
+    text-align: right;
+    padding: 20px;
+    font-size: 2em;
+    margin-bottom: 20px; /* Add margin to create space between display and buttons */
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  button {
+    padding: 20px;
+    font-size: 1.5em;
+    background-color: #444; /* Dark button background */
+    color: white; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded button corners */
+  }
+  
+  button#zero {
+    grid-column: span 2; /* Make the zero button span two columns */
+  }
