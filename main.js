@@ -360,7 +360,3 @@ document.addEventListener("keyup", (e) => {
     key.style.backgroundColor = "#444";
   }
 });
-
-// bugs:
-// keyboard input has unlimited Chars
-// doing keyboard 5, clicking minus and doing + 8 results in -8, not 3
