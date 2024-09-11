@@ -27,20 +27,24 @@ const multiply = function(array) {
 };
 
 const divide = function(array) {
+  if (array[1] == 0){
+    display.textContent = "LOL";
+    return;
+  }
+  else {
+  let divided = array.reduce((accumulator, currentValue) => {
 
-    let divided = array.reduce((accumulator, currentValue) => {
-      return accumulator / currentValue}
-    )
-    return divided;
-  };
+    return accumulator / currentValue}
+  )
+  return divided;
+  }
+};
 
 const operate = function(int1, mathOp, int2){
   let arr = []
   switch(mathOp){
     case "÷": 
-      console.log(int1, int2); // Check input values
       arr = [int1, int2]
-      console.log(arr); // Check array before reduce
       return divide(arr);
     case "x":
       arr = [int1, int2]
@@ -54,21 +58,35 @@ const operate = function(int1, mathOp, int2){
 
 const equals = function(){
 
-  let result = operate(firstNum, mathOperator, secondNum).toString();
-  let [integerPart, decimalPart] = result.split(".");
+  let result = operate(firstNum, mathOperator, secondNum);
 
-  if (integerPart.length > 12) {
-    display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
-  } else {
-    let maxDecimals = 12 - integerPart.length;
-    display.textContent = parseFloat(result).toFixed(maxDecimals);
+  // Check if result is "LOL" or a non-numeric value
+  console.log(result)
+  if (result === undefined) {
+    display.textContent = "LOL";
+    return;
   }
 
+  result = result.toString();
+  let [integerPart, decimalPart] = result.split(".");
 
-
-  // display.textContent = operate(firstNum, mathOperator, secondNum);
-  displayValue = display.textContent;
-  // return operate(firstNum, mathOperator, secondNum);
+  // Handle case where the result is an integer (no decimals)
+  if (!decimalPart) {
+    if (integerPart.length > 12) {
+      display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
+    } else {
+      display.textContent = integerPart; // No decimals, just display integer part
+    }
+  } else {
+    // Handle result with decimals
+    if (integerPart.length > 12) {
+      display.textContent = integerPart.slice(0, 12); // Truncate if integer part is too long
+    } else {
+      let maxDecimals = 12 - integerPart.length; // Calculate how many decimal places we can show
+      let formattedResult = parseFloat(result).toFixed(maxDecimals); // Limit decimals
+      display.textContent = formattedResult;
+    }
+  }
 }
 
 const clear = function() {
