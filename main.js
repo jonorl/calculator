@@ -168,6 +168,7 @@ numButtons.forEach(button => {
             display.textContent = secondNum;
         }
         }
+    button.blur();
     });
 });
 
@@ -251,6 +252,7 @@ opButtons.forEach(button => {
     operatorPressedAlready = true;
     }
   });
+  button.blur();
 });
 
 buttons.forEach(button => {
