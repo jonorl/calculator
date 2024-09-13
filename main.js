@@ -79,9 +79,7 @@ const equals = function(){
   if (!decimalPart) {
     clear();
     firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
-    console.log(firstNum);
     display.textContent = firstNum;
-    console.log("fullInt");
   } 
 
   else {
@@ -89,7 +87,6 @@ const equals = function(){
         clear();
         firstNum = integerPart.slice(0, 12);
         // try 999,999.99 * 999,999.99 to test
-        console.log("shortDisplay")
         display.textContent = firstNum;
         }  
     else {
@@ -98,8 +95,6 @@ const equals = function(){
         formattedResult = removeTrailingZeros(formattedResult);
         clear();
         firstNum = formattedResult
-        console.log(integerPart.length)
-        console.log("longDisplay")
         display.textContent = firstNum;
         }
   }
@@ -328,7 +323,6 @@ buttons.forEach(button => {
 });
 
 document.querySelector(".equals").addEventListener("click", function() {
-  console.log("firstNum " + firstNum + " secondNum " + secondNum + " Math op " + mathOperator)
   if (firstNum == "" || secondNum == "") {
     return;
     } 
@@ -423,7 +417,3 @@ document.addEventListener("keyup", (e) => {
     key.style.backgroundColor = "#444";
   }
 });
-
-//bugs
-
-// Bugs after pressing the clear button
