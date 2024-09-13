@@ -75,17 +75,28 @@ const equals = function(){
 
   const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
   if (!decimalPart) {
-    display.textContent = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+    clear();
+    firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+    display.textContent = firstNum;
   } 
   else {
     if (integerPart.length >= 12) {
-        display.textContent = integerPart.slice(0, 12);
+        clear();
+        firstNum = integerPart.slice(0, 12);
+        // try 999,999.99 * 999,999.99 to test
+        console.log("shortDisplay")
+        display.textContent = firstNum;
         }  
     else {
         let maxDecimals = 12 - integerPart.length;
         let formattedResult = parseFloat(result).toFixed(maxDecimals);
         formattedResult = removeTrailingZeros(formattedResult);
-        display.textContent = formattedResult;
+        clear();
+        firstNum = formattedResult
+        dotPressedFirstNum = true;
+        console.log(integerPart.length)
+        console.log("longDisplay")
+        display.textContent = firstNum;
         }
   }
 }
@@ -149,8 +160,6 @@ let capturingFirst = true;
 let operatorPressedAlready = false;
 let dotPressedFirstNum = false;
 let dotPressedSecondNum = false;
-let minusSignOnFirstNum = false;
-let minusSignOnSecondNum = false;
 
 
 // Event Listeners
@@ -175,11 +184,10 @@ numButtons.forEach(button => {
 document.querySelector(".decimal").addEventListener("click", function() {
   if (capturingFirst) {
     if (firstNum.length < 12) {
-      if(dotPressedFirstNum == true){
+      if(firstNum.includes(".")){
         return;
       }
       else{
-        dotPressedFirstNum = true;
         firstNum += ".";
         display.textContent = firstNum;
         }
@@ -187,11 +195,10 @@ document.querySelector(".decimal").addEventListener("click", function() {
     } 
   else {
     if (secondNum.length < 12) {
-      if(dotPressedSecondNum == true){
+      if(secondNum.includes(".")){
         return;
         }
       else{
-        dotPressedSecondNum = true;
         secondNum += ".";
         display.textContent = secondNum;
         }
@@ -201,25 +208,21 @@ document.querySelector(".decimal").addEventListener("click", function() {
 
 document.querySelector("#plusMinus").addEventListener("click", function() {
   if (capturingFirst) {
-      if(minusSignOnFirstNum == false){
-        minusSignOnFirstNum = true;
+      if(!firstNum.startsWith("-")){
         firstNum = "-" + firstNum 
         display.textContent = firstNum;
         }
-      else {
-        minusSignOnFirstNum = false;
+      else{
         firstNum = firstNum.substring(1);
         display.textContent = firstNum;
         }
   }
   else {
-    if (minusSignOnSecondNum == false) {
-        minusSignOnSecondNum = true;
+    if (!secondNum.startsWith("-")) {
         secondNum = "-" + secondNum
         display.textContent = secondNum;
         }
     else{
-      minusSignOnSecondNum = false;
       secondNum = secondNum.substring(1);
       display.textContent = secondNum;
       }
@@ -235,6 +238,7 @@ document.querySelector("#percentage").addEventListener("click", function() {
     secondNum = secondNum * 0.01;
     display.textContent = secondNum;
   }
+  document.querySelector("#percentage").button.blur();
 })
 
 opButtons.forEach(button => {
@@ -360,3 +364,9 @@ document.addEventListener("keyup", (e) => {
     key.style.backgroundColor = "#444";
   }
 });
+
+//bugs
+
+// Hitting backspace after adding a dot
+// hitting plusMinus, percentage or dot after calculation
+// 999,999.99 * 999,999.99 * 7(plusMinus) = --69999998600
