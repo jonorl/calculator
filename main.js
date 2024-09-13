@@ -78,13 +78,10 @@ const equals = function(){
 
   if (!decimalPart) {
     clear();
-    console.log("integer part: " + integerPart)
     firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
-    console.log("firstNum: " + firstNum)
+    console.log(firstNum);
     display.textContent = firstNum;
-    console.log("firstNum: " + firstNum)
-    console.log("displaytextContent: " + display.textContent)
-    console.log("fullIntReturn")
+    console.log("fullInt");
   } 
 
   else {
@@ -115,6 +112,7 @@ const clear = function() {
   mathOperator = "";
   capturingFirst = true;
   operatorPressedAlready = false;
+  document.querySelector("#clear").blur();
 }
 
 const dot = function() {
@@ -330,13 +328,14 @@ buttons.forEach(button => {
 });
 
 document.querySelector(".equals").addEventListener("click", function() {
-  console.log("firstNum " + firstNum + "secondNum " + secondNum + "Math op " + mathOperator)
+  console.log("firstNum " + firstNum + " secondNum " + secondNum + " Math op " + mathOperator)
   if (firstNum == "" || secondNum == "") {
     return;
     } 
   else {
     equals(); 
     }
+  document.querySelector(".equals").blur();
 });
 
 document.querySelector("#clear").addEventListener("click", clear);
@@ -427,6 +426,4 @@ document.addEventListener("keyup", (e) => {
 
 //bugs
 
-// hitting plusMinus, percentage or dot after calculation ruins everything
-// 999,999.99 * 999,999.99 * 7(plusMinus) = 69999998600
-// hitting percentage keeps adding chars over 12
+// Bugs after pressing the clear button
