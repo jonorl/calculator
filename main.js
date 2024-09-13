@@ -66,7 +66,6 @@ const equals = function(){
     display.textContent = "LOL";
     return;
   }
-  
 
   // Dynamically adjust length to have max 12 chars displayed
 
@@ -206,6 +205,7 @@ document.querySelector(".decimal").addEventListener("click", function() {
         }
       }
     }
+    document.querySelector(".decimal").blur();
 })
 
 document.querySelector("#plusMinus").addEventListener("click", function() {
@@ -229,6 +229,7 @@ document.querySelector("#plusMinus").addEventListener("click", function() {
       display.textContent = secondNum;
       }
   }
+  document.querySelector("#plusMinus").blur();
 })
 
 document.querySelector("#percentage").addEventListener("click", function() {
@@ -296,6 +297,7 @@ document.querySelector("#percentage").addEventListener("click", function() {
           }
     }
   }
+  document.querySelector("#percentage").blur();
 });
 
 opButtons.forEach(button => {
