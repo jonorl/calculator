@@ -73,12 +73,19 @@ const equals = function(){
   result = result.toString();
   let [integerPart, decimalPart] = result.split(".");
 
+
   const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
+
+
   if (!decimalPart) {
     clear();
+    console.log("integer part: " + integerPart)
     firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+    console.log("firstNum: " + firstNum)
     display.textContent = firstNum;
-    console.log("fullIntreturn")
+    console.log("firstNum: " + firstNum)
+    console.log("displaytextContent: " + display.textContent)
+    console.log("fullIntReturn")
   } 
 
   else {
@@ -296,10 +303,11 @@ opButtons.forEach(button => {
     capturingFirst = false;
     if(operatorPressedAlready === true){
       equals();
+      capturingFirst = false;
+      operatorPressedAlready = true;
       mathOperator = button.textContent;
       firstNum = display.textContent;
       secondNum = "";
-      dotPressedSecondNum = false;
     }
     else {
     mathOperator = button.textContent;
