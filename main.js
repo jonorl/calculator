@@ -78,7 +78,9 @@ const equals = function(){
     clear();
     firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
     display.textContent = firstNum;
+    console.log("fullIntreturn")
   } 
+
   else {
     if (integerPart.length >= 12) {
         clear();
@@ -93,7 +95,6 @@ const equals = function(){
         formattedResult = removeTrailingZeros(formattedResult);
         clear();
         firstNum = formattedResult
-        dotPressedFirstNum = true;
         console.log(integerPart.length)
         console.log("longDisplay")
         display.textContent = firstNum;
@@ -108,10 +109,6 @@ const clear = function() {
   mathOperator = "";
   capturingFirst = true;
   operatorPressedAlready = false;
-  dotPressedFirstNum = false;
-  dotPressedSecondNum = false;
-  minusSignOnFirstNum = false;
-  minusSignOnSecondNum = false;
 }
 
 const dot = function() {
@@ -158,8 +155,6 @@ let secondNum = "";
 let mathOperator = "";
 let capturingFirst = true;
 let operatorPressedAlready = false;
-let dotPressedFirstNum = false;
-let dotPressedSecondNum = false;
 
 
 // Event Listeners
@@ -230,16 +225,71 @@ document.querySelector("#plusMinus").addEventListener("click", function() {
 })
 
 document.querySelector("#percentage").addEventListener("click", function() {
+
+
+
   if (capturingFirst) {
     firstNum = firstNum * 0.01;
-    display.textContent = firstNum;
+    firstNumVar = firstNum.toString();
+
+    let [integerPart, decimalPart] = firstNumVar.split(".");
+
+    const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
+    if (!decimalPart) {
+      clear();
+      firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+      display.textContent = firstNum;
+    } 
+
+    if (!decimalPart) {
+      firstNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+      display.textContent = firstNum;
+      } 
+    else {
+      if (integerPart.length >= 12) {
+          display.textContent = firstNum;
+          }  
+      else {
+          let maxDecimals = 12 - integerPart.length;
+          let formattedResult = parseFloat(firstNumVar).toFixed(maxDecimals);
+          formattedResult = removeTrailingZeros(formattedResult);
+          firstNum = formattedResult
+          display.textContent = firstNum;
+          }
     }
+  }
+
   else {
     secondNum = secondNum * 0.01;
-    display.textContent = secondNum;
+    secondNumVar = secondNum.toString();
+
+    let [integerPart, decimalPart] = secondNumVar.split(".");
+
+    const removeTrailingZeros = (str) => str.replace(/\.?0+$/, '');
+    if (!decimalPart) {
+      clear();
+      secondNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+      display.textContent = secondNum;
+    }
+
+    if (!decimalPart) {
+      secondNum = integerPart.length > 12 ? integerPart.slice(0, 12) : integerPart;
+      display.textContent = secondNum;
+      } 
+    else {
+      if (integerPart.length >= 12) {
+          display.textContent = secondNum;
+          }  
+      else {
+          let maxDecimals = 12 - integerPart.length;
+          let formattedResult = parseFloat(secondNumVar).toFixed(maxDecimals);
+          formattedResult = removeTrailingZeros(formattedResult);
+          secondNum = formattedResult
+          display.textContent = secondNum;
+          }
+    }
   }
-  document.querySelector("#percentage").button.blur();
-})
+});
 
 opButtons.forEach(button => {
   button.addEventListener("click", function() {
@@ -367,6 +417,6 @@ document.addEventListener("keyup", (e) => {
 
 //bugs
 
-// Hitting backspace after adding a dot
-// hitting plusMinus, percentage or dot after calculation
-// 999,999.99 * 999,999.99 * 7(plusMinus) = --69999998600
+// hitting plusMinus, percentage or dot after calculation ruins everything
+// 999,999.99 * 999,999.99 * 7(plusMinus) = 69999998600
+// hitting percentage keeps adding chars over 12
